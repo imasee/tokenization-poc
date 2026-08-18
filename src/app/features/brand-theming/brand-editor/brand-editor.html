@@ -4,31 +4,64 @@
   <fieldset class="brand-editor__section" formGroupName="colors">
     <legend class="brand-editor__legend">Brand colors</legend>
 
-    <div class="brand-editor__color-grid">
-      @for (field of colorFields; track field.key) {
-        <label class="brand-editor__field brand-editor__field--color">
-          <span class="brand-editor__label">{{ field.label }}</span>
-          <span class="brand-editor__color-input">
-            <input
-              type="color"
-              [value]="colorSwatchValue(field.key)"
-              (input)="onColorPicked(field.key, $event)"
-              [attr.aria-label]="field.label + ' color picker'"
-            />
-            <input
-              type="text"
-              [formControlName]="field.key"
-              [attr.aria-label]="field.label + ' hex value'"
-              spellcheck="false"
-              maxlength="7"
-            />
-          </span>
-          <span class="brand-editor__hint">{{ field.hint }}</span>
-          @if (form.controls.colors.controls[field.key].invalid && form.controls.colors.controls[field.key].touched) {
-            <span class="brand-editor__error" role="alert">Enter a valid hex color (e.g. #3A2F3C).</span>
-          }
-        </label>
-      }
+    <div class="brand-editor__color-group">
+      <h3 class="brand-editor__color-group-title">Already in branding engine</h3>
+      <div class="brand-editor__color-grid">
+        @for (field of engineColorFields; track field.key) {
+          <label class="brand-editor__field brand-editor__field--color">
+            <span class="brand-editor__label">{{ field.label }}</span>
+            <span class="brand-editor__color-input">
+              <input
+                type="color"
+                [value]="colorSwatchValue(field.key)"
+                (input)="onColorPicked(field.key, $event)"
+                [attr.aria-label]="field.label + ' color picker'"
+              />
+              <input
+                type="text"
+                [formControlName]="field.key"
+                [attr.aria-label]="field.label + ' hex value'"
+                spellcheck="false"
+                maxlength="7"
+              />
+            </span>
+            <span class="brand-editor__hint">{{ field.hint }}</span>
+            @if (form.controls.colors.controls[field.key].invalid && form.controls.colors.controls[field.key].touched) {
+              <span class="brand-editor__error" role="alert">Enter a valid hex color (e.g. #3A2F3C).</span>
+            }
+          </label>
+        }
+      </div>
+    </div>
+
+    <div class="brand-editor__color-group brand-editor__color-group--pending">
+      <h3 class="brand-editor__color-group-title">Needs to be added to branding engine</h3>
+      <div class="brand-editor__color-grid">
+        @for (field of pendingColorFields; track field.key) {
+          <label class="brand-editor__field brand-editor__field--color">
+            <span class="brand-editor__label">{{ field.label }}</span>
+            <span class="brand-editor__color-input">
+              <input
+                type="color"
+                [value]="colorSwatchValue(field.key)"
+                (input)="onColorPicked(field.key, $event)"
+                [attr.aria-label]="field.label + ' color picker'"
+              />
+              <input
+                type="text"
+                [formControlName]="field.key"
+                [attr.aria-label]="field.label + ' hex value'"
+                spellcheck="false"
+                maxlength="7"
+              />
+            </span>
+            <span class="brand-editor__hint">{{ field.hint }}</span>
+            @if (form.controls.colors.controls[field.key].invalid && form.controls.colors.controls[field.key].touched) {
+              <span class="brand-editor__error" role="alert">Enter a valid hex color (e.g. #3A2F3C).</span>
+            }
+          </label>
+        }
+      </div>
     </div>
   </fieldset>
 

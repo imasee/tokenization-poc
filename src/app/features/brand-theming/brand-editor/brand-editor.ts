@@ -23,9 +23,14 @@ interface ColorFieldMeta {
   hint: string;
 }
 
-const COLOR_FIELDS: ColorFieldMeta[] = [
+/** Colors `ThemeManagerService`/brand-engine already maps and themes out of the box. */
+const ENGINE_COLOR_FIELDS: ColorFieldMeta[] = [
   { key: 'primary', label: 'Primary', hint: 'Main brand color' },
   { key: 'accent', label: 'Accent', hint: 'Call-to-action highlight' },
+];
+
+/** Extra roles our palette supports that brand-engine doesn't map yet. */
+const PENDING_COLOR_FIELDS: ColorFieldMeta[] = [
   { key: 'warn', label: 'Warn', hint: 'Error / destructive actions' },
   { key: 'success', label: 'Success', hint: 'Positive / confirmation states' },
   { key: 'alert', label: 'Alert', hint: 'Warning states' },
@@ -36,6 +41,8 @@ const COLOR_FIELDS: ColorFieldMeta[] = [
   { key: 'color3', label: 'Color 3', hint: 'Brand-specific slot' },
   { key: 'color4', label: 'Color 4', hint: 'Brand-specific slot' },
 ];
+
+const COLOR_FIELDS: ColorFieldMeta[] = [...ENGINE_COLOR_FIELDS, ...PENDING_COLOR_FIELDS];
 
 const FALLBACK_HEX = '#000000';
 
@@ -58,6 +65,8 @@ export class BrandEditor {
   readonly resetRequested = output<void>();
 
   readonly colorFields = COLOR_FIELDS;
+  readonly engineColorFields = ENGINE_COLOR_FIELDS;
+  readonly pendingColorFields = PENDING_COLOR_FIELDS;
 
   readonly form = this.fb.nonNullable.group({
     name: this.fb.nonNullable.control('', Validators.required),
