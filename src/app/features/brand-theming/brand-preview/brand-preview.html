@@ -30,12 +30,21 @@
         <h3>Background primary</h3>
         <p>Surface tone for the main content area.</p>
       </article>
-
     </div>
 
+    <div class="brand-preview__statuses">
+      @for (status of statusMessages; track status.key) {
+        <p [class]="'brand-preview__status brand-preview__status--' + status.key">
+          <strong>{{ status.label }}:</strong> {{ status.message }}
+        </p>
+      }
+    </div>
+
+    <h3 class="brand-preview__heading brand-preview__heading--small">Palette</h3>
     <div class="brand-preview__swatches">
-      <span class="brand-preview__swatch brand-preview__swatch--secondary-accent">Some Item</span>
-      <span class="brand-preview__swatch brand-preview__swatch--tertiary-accent">Another</span>
+      @for (swatch of colorSwatches; track swatch.key) {
+        <span [class]="'brand-preview__swatch brand-preview__swatch--' + swatch.key">{{ swatch.label }}</span>
+      }
     </div>
   </div>
 </section>

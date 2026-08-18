@@ -1,5 +1,8 @@
 @use "theming/core" as t;
 
+/// Every runtime-overridable color role — kept in sync with $_role-config in _colors-config.scss.
+$_roles: primary, accent, warn, success, alert, attention, neutral, color1, color2, color3, color4;
+
 :host {
   display: block;
   color: t.theme-color('neutral', 'black');
@@ -121,6 +124,30 @@
    @include t.apply-bg-contrast('neutral', 100);
 }
 
+.brand-preview__statuses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.brand-preview__status {
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+}
+
+@each $role in success, warn, alert, attention {
+  .brand-preview__status--#{$role} {
+    @include t.apply-bg-contrast($role, 100);
+  }
+}
+
+.brand-preview__heading--small {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
 .brand-preview__swatches {
   display: flex;
   flex-wrap: wrap;
@@ -134,11 +161,9 @@
   font-weight: 600;
 }
 
-.brand-preview__swatch--secondary-accent {
-    @include t.apply-bg-contrast('color3', 500);
-}
-
-.brand-preview__swatch--tertiary-accent {
-  @include t.apply-bg-contrast('color2', 500);
+@each $role in $_roles {
+  .brand-preview__swatch--#{$role} {
+    @include t.apply-bg-contrast($role, 500);
+  }
 }
 
