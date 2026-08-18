@@ -1,0 +1,9 @@
+@use 'sass:math';
+@use 'sass:map';
+
+/// Convert a pixel value to rem.
+/// @param {Number} $size - Size in pixels.
+/// @return {String} Size in rem units.
+@function rem($size, $base-size: 16) {
+  @return math.div($size, $base-size) * 1rem;
+}

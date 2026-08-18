@@ -1,0 +1,27 @@
+@use './core' as theming;
+@use './theme-helpers';
+
+// Color source — pick one option, comment out the other.
+// Option A: Built-in Nexus nex2 palette (no extra config needed).
+// Option B: Your own brand colors — edit ./palettes.scss and ./colors-config.scss.
+
+// @use "@triparc/nexus/styles/colors/nex2" as nex2-colors; // Option A
+@use './colors-config' as brand; // Option B (active)
+
+@use '@triparc/nexus/styles';
+
+@include theming.core();
+
+$theme: theming.create-theme(
+  (
+    version: 1,
+
+    color: brand.$color-config,
+    background: brand.$background-config,
+    // color:      nex2-colors.$color-config,      // Option A
+    // background: nex2-colors.$background-config, // Option A
+    typography: theming.$typography-config,
+  )
+);
+
+@include theme-helpers.apply-theme($theme);

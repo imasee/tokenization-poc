@@ -1,0 +1,9 @@
+@use 'functions';
+
+$breakpoints: (
+  xs: 0,
+  sm: functions.rem(600),
+  md: functions.rem(905),
+  lg: functions.rem(1240),
+  xl: functions.rem(1440),
+) !default;

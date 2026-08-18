@@ -1,0 +1,23 @@
+@use './core' as theming;
+@use './core/settings';
+@use '@triparc/nexus/styles/extensions/nexus2-extension';
+
+$_prefix: settings.$theme-prefix;
+
+@mixin apply-theme($theme) {
+  // Apply Angular Material + Nexus component themes
+  @include theming.all-component-themes($theme);
+
+  // Emit theme as CSS custom properties (--brand-* variables)
+  @include theming.generate-theme-variables($theme, $prefix: $_prefix);
+
+  // Apply Nexus 2 component style overrides
+  // (temporary bridge until Nexus 2.0 / Material 3 components ship)
+  @include nexus2-extension.apply-styles($_prefix);
+
+  // Uncomment to emit Material Design 2 typography utility classes:
+  // @include theming.emit-typography-hierarchy($theme);
+
+  // Uncomment to emit Material Design 3 typography utility classes:
+  // @include theming.emit-m3-compat-typography-hierarchy(theming.$m3-typography-config);
+}

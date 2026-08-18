@@ -1,0 +1,88 @@
+<form class="brand-editor" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset class="brand-editor__section">
+    <legend class="brand-editor__legend">Brand identity</legend>
+
+    <label class="brand-editor__field">
+      <span class="brand-editor__label">Brand name</span>
+      <input
+        type="text"
+        formControlName="name"
+        [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched"
+      />
+      @if (form.controls.name.invalid && form.controls.name.touched) {
+        <span class="brand-editor__error" role="alert">Brand name is required.</span>
+      }
+    </label>
+
+    <label class="brand-editor__field">
+      <span class="brand-editor__label">Legal name</span>
+      <input
+        type="text"
+        formControlName="legalName"
+        [attr.aria-invalid]="form.controls.legalName.invalid && form.controls.legalName.touched"
+      />
+      @if (form.controls.legalName.invalid && form.controls.legalName.touched) {
+        <span class="brand-editor__error" role="alert">Legal name is required.</span>
+      }
+    </label>
+
+    <label class="brand-editor__field">
+      <span class="brand-editor__label">Default font family</span>
+      <input type="text" formControlName="defaultFontFamily" />
+    </label>
+
+    <label class="brand-editor__field">
+      <span class="brand-editor__label">Display font family</span>
+      <input type="text" formControlName="displayFontFamily" />
+    </label>
+  </fieldset>
+
+  <fieldset class="brand-editor__section" formGroupName="colors">
+    <legend class="brand-editor__legend">Brand colors</legend>
+
+    <div class="brand-editor__color-grid">
+      @for (field of colorFields; track field.key) {
+        <label class="brand-editor__field brand-editor__field--color">
+          <span class="brand-editor__label">{{ field.label }}</span>
+          <span class="brand-editor__color-input">
+            <input
+              type="color"
+              [value]="colorSwatchValue(field.key)"
+              (input)="onColorPicked(field.key, $event)"
+              [attr.aria-label]="field.label + ' color picker'"
+            />
+            <input
+              type="text"
+              [formControlName]="field.key"
+              [attr.aria-label]="field.label + ' hex value'"
+              spellcheck="false"
+              maxlength="7"
+            />
+          </span>
+          <span class="brand-editor__hint">{{ field.hint }}</span>
+          @if (form.controls.colors.controls[field.key].invalid && form.controls.colors.controls[field.key].touched) {
+            <span class="brand-editor__error" role="alert">Enter a valid hex color (e.g. #3A2F3C).</span>
+          }
+        </label>
+      }
+    </div>
+  </fieldset>
+
+  <div class="brand-editor__actions">
+    <button
+      type="button"
+      class="brand-editor__button brand-editor__button--ghost"
+      [disabled]="saving()"
+      (click)="onReset()"
+    >
+      Reset to default
+    </button>
+    <button
+      type="submit"
+      class="brand-editor__button brand-editor__button--primary"
+      [disabled]="saving() || form.invalid"
+    >
+      {{ saving() ? 'Saving…' : 'Save brand' }}
+    </button>
+  </div>
+</form>

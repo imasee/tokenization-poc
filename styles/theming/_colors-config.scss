@@ -1,0 +1,58 @@
+// Color roles:
+//   primary / accent / warn              — Angular Material component colors
+//   success / alert / attention / neutral — Nexus semantic UI colors
+//   color1–color4                         — App-specific brand slots
+//   brand1–brand5                         — Runtime brand-engine palettes, driven live by
+//                                            <be-theme-provider> CSS custom properties
+@use 'sass:map';
+@use './palettes';
+@use './core' as nex;
+@use './core/settings';
+@use '@triparc/brand-engine/scss' as branding with (
+  $theme-prefix: settings.$theme-prefix
+);
+
+$_color-config: (
+  primary: nex.define-palette(palettes.$forest-green, 500),
+  accent: nex.define-palette(palettes.$steel-grey, 900),
+  warn: nex.define-palette(palettes.$crimson-red, 500),
+  success: nex.define-palette(palettes.$emerald-green, 500),
+  alert: nex.define-palette(palettes.$golden-amber, 500),
+  attention: nex.define-palette(palettes.$ocean-blue, 500),
+  neutral: nex.define-palette(palettes.$steel-grey, 500),
+  color1: nex.define-palette(palettes.$sunshine-yellow, 500),
+  color2: nex.define-palette(palettes.$coral-red, 500),
+  color3: nex.define-palette(palettes.$sky-blue, 500),
+  color4: nex.define-palette(palettes.$mint-green, 500),
+);
+
+// Runtime brand palettes — each map resolves to var(--cp-colors-<name>-<shade>) at runtime,
+// populated by <be-theme-provider themePrefix="cp"> from the (mock) Branding API.
+$_brand-primary: branding.create-theme-palette('primary');
+$_brand-secondary: branding.create-theme-palette('secondary');
+$_brand-tertiary: branding.create-theme-palette('tertiary');
+$_brand-accent: branding.create-theme-palette('accent');
+$_brand-tertiary-accent: branding.create-theme-palette('tertiaryAccent');
+$_brand-background-primary: branding.create-theme-palette('backgroundPrimary');
+$_brand-background-secondary: branding.create-theme-palette('backgroundSecondary');
+$_brand-background-tertiary: branding.create-theme-palette('backgroundTertiary');
+
+$color-config: map.merge(
+  $_color-config,
+  (
+    brand1: nex.define-palette($_brand-primary, 500),
+    brand2: nex.define-palette($_brand-secondary, 500),
+    brand3: nex.define-palette($_brand-tertiary, 500),
+    brand4: nex.define-palette($_brand-accent, 500),
+    brand5: nex.define-palette($_brand-tertiary-accent, 500),
+    background-primary: nex.define-palette($_brand-background-primary, 500),
+    background-secondary: nex.define-palette($_brand-background-secondary, 500),
+    background-tertiary: nex.define-palette($_brand-background-tertiary, 500),
+  )
+);
+
+// Override surface/outline token colors with specific palette shades.
+$background-config: (
+  focused-input: map.get($_color-config, 'color3', 800),
+  outline: map.get($_color-config, 'neutral', 400),
+);

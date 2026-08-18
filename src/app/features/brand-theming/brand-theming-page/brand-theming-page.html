@@ -1,0 +1,31 @@
+<main class="brand-theming-page">
+  <header class="brand-theming-page__header">
+    <h1>Dynamic Brand Theming</h1>
+    <p>
+      Edit brand details on the left. A mock API simulates the real branding endpoint
+      (with network delay) while the right panel previews changes live.
+    </p>
+  </header>
+
+  @if (statusMessage()) {
+    <p class="brand-theming-page__status" role="status">{{ statusMessage() }}</p>
+  }
+
+  <div class="brand-theming-page__grid">
+    <section class="brand-theming-page__editor" aria-label="Brand editor">
+      <h2 class="brand-theming-page__section-title">Editor</h2>
+      <app-brand-editor
+        [brandConfig]="initialConfig()"
+        [saving]="busy()"
+        (configChange)="onConfigChange($event)"
+        (save)="onSave($event)"
+        (resetRequested)="onReset()"
+      />
+    </section>
+
+    <section class="brand-theming-page__preview" aria-label="Brand preview">
+      <h2 class="brand-theming-page__section-title">Preview</h2>
+      <app-brand-preview [brandConfig]="liveConfig()" />
+    </section>
+  </div>
+</main>

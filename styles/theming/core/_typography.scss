@@ -1,0 +1,19 @@
+@use 'sass:string';
+@use '../../abstracts' as abs;
+
+$default-font-family: string.unquote('"Inter", sans-serif') !default;
+
+$typography-config: (
+  font-family: $default-font-family,
+);
+
+// Uncomment to customise Material Design 3 typography scale:
+// $m3-typography-config: (
+//   "font-family": string.unquote('"Inter", sans-serif'),
+//   "body": (
+//     "small": (
+//       "size": abs.rem(12),
+//       "line-height": 1,
+//     ),
+//   ),
+// );

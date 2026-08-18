@@ -1,0 +1,71 @@
+@use '../abstracts/functions' as functions;
+
+// Nexus Utilities Configuration
+// Uncomment and modify any option below to override the library defaults.
+// --- General ---
+// $enable-important-utilities: true,       // Add !important to utility values
+// $prefix: nex-,                           // CSS class prefix (e.g. .nex-d-flex)
+//
+// --- Breakpoints ---
+// $breakpoints: (sm: 360px, md: 768px, lg: 1024px),
+// $grid-breakpoints: $breakpoints,         // Breakpoints used for the grid system
+// $utilities-breakpoints: $breakpoints,    // Breakpoints used for responsive utilities
+//
+// --- Spacing ---
+// $spacers: (0: 0, 4: functions.rem(4), 16: functions.rem(16), 24: functions.rem(24), 32: functions.rem(32), 40: functions.rem(40)),
+// $margin-spacers: $spacers,              // Spacer scale used for margin utilities
+// $padding-spacers: $spacers,             // Spacer scale used for padding utilities
+//
+// --- Grid ---
+// $grid-columns: 12,                      // Number of grid columns
+// $grid-gutter-width: 1.5rem,             // Default gutter between columns
+// $gutters: $spacers,                     // Gutter scale for .row/.col
+// $generate-grid-classes: true,           // Toggle grid class generation
+//
+// --- Utilities ---
+// $generate-utility-classes: true,        // Toggle utility class generation
+// $utilities: (),                         // Add or override utility definitions (merged with defaults)
+//
+// The $utilities map supports the same Bootstrap-style API:
+//   property, class, values, responsive, print
+//
+// Example (adding a custom utility):
+//   $utilities: (
+//     "my-custom": (
+//       property: my-property,
+//       class: my,
+//       values: (a: value-a, b: value-b),
+//       responsive: true,
+//     ),
+//   ),
+
+@use '@triparc/nexus/styles/utilities' with (
+  // 1. Breakpoints
+  $breakpoints: (sm: 360px, md: 768px, lg: 1024px),
+
+  // 2. Spacing scale
+  $spacers: (0: 0, 8: functions.rem(8), 16: functions.rem(16)),
+
+  // 3. Gutters (for .row/.col)
+  $gutters: (8: functions.rem(8), 16: functions.rem(16)),
+
+  // 4. Utilities map: add or override
+  $utilities: (
+      'justify-content': (
+        responsive: true,
+        property: justify-content,
+        values: (
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          between: space-between,
+          around: space-around,
+          evenly: space-evenly,
+        ),
+      )
+    ),
+
+  // 5. Toggle features
+  $generate-grid-classes: true,
+  $generate-utility-classes: true
+);
