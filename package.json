@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --configuration production --base-href /tokenization-poc/ && gh-pages -d dist/tokenization-poc/browser"
+    "deploy": "node scripts/deploy.js"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
