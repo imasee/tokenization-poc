@@ -17,6 +17,8 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@triparc/brand-engine": "^21.0.19",
+    "@triparc/nexus": "^21.0.2054",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
