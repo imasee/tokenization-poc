@@ -1,0 +1,51 @@
+// Runtime-overridable brand palette with static "default" fallback tokens.
+//
+// Each shade resolves to the live CSS variable driven by <be-theme-provider>, falling back to
+// a static "default" token (compiled at build time from a ./palettes.scss map) until brand
+// tokens have loaded from the Branding API:
+//
+@use 'sass:map';
+@use './core/settings';
+
+$_levels: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+
+// Builds a palette map whose shades read the live brand token first, falling back to the
+// static default token emitted by `emit-default-tokens()` below.
+@function create-theme-palette($name, $prefix: settings.$theme-prefix) {
+  $palette: ();
+
+  @each $level in $_levels {
+    $live: --#{$prefix}-colors-#{$name}-#{$level};
+    $default: --#{$prefix}-colors-default-#{$name}-#{$level};
+    $palette: map.merge($palette, ($level: var(#{$live}, var(#{$default}))));
+  }
+
+  $contrast: ();
+
+  @each $level in $_levels {
+    $live: --#{$prefix}-colors-#{$name}-contrast-#{$level};
+    $default: --#{$prefix}-colors-default-#{$name}-contrast-#{$level};
+    $contrast: map.merge($contrast, ($level: var(#{$live}, var(#{$default}))));
+  }
+
+  @return map.merge($palette, ('contrast': $contrast));
+}
+
+// Call once with a map of brand-slot name => source palette, e.g. (primary: palettes.$forest-green).
+@mixin emit-default-tokens($name-palette-map, $prefix: settings.$theme-prefix) {
+  :root {
+    @each $name, $palette in $name-palette-map {
+      @each $level in $_levels {
+        --#{$prefix}-colors-default-#{$name}-#{$level}: #{map.get($palette, $level)};
+      }
+
+      $contrast: map.get($palette, 'contrast');
+
+      @if $contrast {
+        @each $level in $_levels {
+          --#{$prefix}-colors-default-#{$name}-contrast-#{$level}: #{map.get($contrast, $level)};
+        }
+      }
+    }
+  }
+}

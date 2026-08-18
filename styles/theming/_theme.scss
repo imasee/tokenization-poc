@@ -18,8 +18,6 @@ $theme: theming.create-theme(
 
     color: brand.$color-config,
     background: brand.$background-config,
-    // color:      nex2-colors.$color-config,      // Option A
-    // background: nex2-colors.$background-config, // Option A
     typography: theming.$typography-config,
   )
 );

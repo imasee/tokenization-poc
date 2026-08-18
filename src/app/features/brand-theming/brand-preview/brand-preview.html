@@ -1,0 +1,41 @@
+
+<section class="brand-preview">
+  <header class="brand-preview__header">
+    <span class="brand-preview__logo" aria-hidden="true">{{ brandConfig().name.charAt(0) || '?' }}</span>
+    <div>
+      <p class="brand-preview__brand-name" [style.font-family]="brandConfig().fonts.display.fontFamily">
+        {{ brandConfig().name || 'Brand name' }}
+      </p>
+      <p class="brand-preview__legal-name">{{ brandConfig().legalName || 'Legal name' }}</p>
+    </div>
+  </header>
+
+  <div class="brand-preview__body">
+    <h2 class="brand-preview__heading" [style.font-family]="brandConfig().fonts.display.fontFamily">
+      Design that reflects your brand
+    </h2>
+    <p class="brand-preview__paragraph">
+      This panel is themed live by <code>&#64;triparc/brand-engine</code> — nothing here is saved
+      until you press <strong>Save brand</strong>.
+    </p>
+
+    <div class="brand-preview__buttons">
+      <button type="button" class="brand-preview__button brand-preview__button--primary">Primary action</button>
+      <button type="button" class="brand-preview__button brand-preview__button--secondary">Secondary action</button>
+      <button type="button" class="brand-preview__button brand-preview__button--accent">Accent action</button>
+    </div>
+
+    <div class="brand-preview__cards">
+      <article class="brand-preview__card brand-preview__card--primary">
+        <h3>Background primary</h3>
+        <p>Surface tone for the main content area.</p>
+      </article>
+
+    </div>
+
+    <div class="brand-preview__swatches">
+      <span class="brand-preview__swatch brand-preview__swatch--secondary-accent">Some Item</span>
+      <span class="brand-preview__swatch brand-preview__swatch--tertiary-accent">Another</span>
+    </div>
+  </div>
+</section>

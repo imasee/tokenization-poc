@@ -27,6 +27,25 @@
   }
 }
 
+.brand-theming-page__heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand-theming-page__mock-toggle {
+  flex: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .brand-theming-page__status {
   margin: 0;
   padding: 0.65rem 1rem;

@@ -1,41 +1,5 @@
 <form class="brand-editor" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <fieldset class="brand-editor__section">
-    <legend class="brand-editor__legend">Brand identity</legend>
 
-    <label class="brand-editor__field">
-      <span class="brand-editor__label">Brand name</span>
-      <input
-        type="text"
-        formControlName="name"
-        [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched"
-      />
-      @if (form.controls.name.invalid && form.controls.name.touched) {
-        <span class="brand-editor__error" role="alert">Brand name is required.</span>
-      }
-    </label>
-
-    <label class="brand-editor__field">
-      <span class="brand-editor__label">Legal name</span>
-      <input
-        type="text"
-        formControlName="legalName"
-        [attr.aria-invalid]="form.controls.legalName.invalid && form.controls.legalName.touched"
-      />
-      @if (form.controls.legalName.invalid && form.controls.legalName.touched) {
-        <span class="brand-editor__error" role="alert">Legal name is required.</span>
-      }
-    </label>
-
-    <label class="brand-editor__field">
-      <span class="brand-editor__label">Default font family</span>
-      <input type="text" formControlName="defaultFontFamily" />
-    </label>
-
-    <label class="brand-editor__field">
-      <span class="brand-editor__label">Display font family</span>
-      <input type="text" formControlName="displayFontFamily" />
-    </label>
-  </fieldset>
 
   <fieldset class="brand-editor__section" formGroupName="colors">
     <legend class="brand-editor__legend">Brand colors</legend>

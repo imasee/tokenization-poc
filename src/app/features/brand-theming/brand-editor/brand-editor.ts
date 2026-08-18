@@ -6,14 +6,16 @@ const HEX_COLOR_PATTERN = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
 
 type EditableColorKey =
   | 'primary'
-  | 'secondary'
-  | 'tertiary'
   | 'accent'
-  | 'secondaryAccent'
-  | 'tertiaryAccent'
-  | 'backgroundPrimary'
-  | 'backgroundSecondary'
-  | 'backgroundTertiary';
+  | 'warn'
+  | 'success'
+  | 'alert'
+  | 'attention'
+  | 'neutral'
+  | 'color1'
+  | 'color2'
+  | 'color3'
+  | 'color4';
 
 interface ColorFieldMeta {
   key: EditableColorKey;
@@ -23,14 +25,16 @@ interface ColorFieldMeta {
 
 const COLOR_FIELDS: ColorFieldMeta[] = [
   { key: 'primary', label: 'Primary', hint: 'Main brand color' },
-  { key: 'secondary', label: 'Secondary', hint: 'Supporting brand color' },
-  { key: 'tertiary', label: 'Tertiary', hint: 'Additional accent surface' },
   { key: 'accent', label: 'Accent', hint: 'Call-to-action highlight' },
-  { key: 'secondaryAccent', label: 'Secondary Accent', hint: 'Secondary highlight' },
-  { key: 'tertiaryAccent', label: 'Tertiary Accent', hint: 'Tertiary highlight' },
-  { key: 'backgroundPrimary', label: 'Background Primary', hint: 'Main page background' },
-  { key: 'backgroundSecondary', label: 'Background Secondary', hint: 'Section background' },
-  { key: 'backgroundTertiary', label: 'Background Tertiary', hint: 'Card / surface background' },
+  { key: 'warn', label: 'Warn', hint: 'Error / destructive actions' },
+  { key: 'success', label: 'Success', hint: 'Positive / confirmation states' },
+  { key: 'alert', label: 'Alert', hint: 'Warning states' },
+  { key: 'attention', label: 'Attention', hint: 'Informational highlight' },
+  { key: 'neutral', label: 'Neutral', hint: 'Neutral UI surfaces' },
+  { key: 'color1', label: 'Color 1', hint: 'Brand-specific slot' },
+  { key: 'color2', label: 'Color 2', hint: 'Brand-specific slot' },
+  { key: 'color3', label: 'Color 3', hint: 'Brand-specific slot' },
+  { key: 'color4', label: 'Color 4', hint: 'Brand-specific slot' },
 ];
 
 const FALLBACK_HEX = '#000000';
@@ -62,14 +66,16 @@ export class BrandEditor {
     displayFontFamily: this.fb.nonNullable.control('', Validators.required),
     colors: this.fb.nonNullable.group({
       primary: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      secondary: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      tertiary: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
       accent: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      secondaryAccent: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      tertiaryAccent: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      backgroundPrimary: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      backgroundSecondary: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
-      backgroundTertiary: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      warn: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      success: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      alert: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      attention: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      neutral: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      color1: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      color2: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      color3: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
+      color4: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(HEX_COLOR_PATTERN)]),
     }),
   });
 
@@ -95,14 +101,16 @@ export class BrandEditor {
       displayFontFamily: config.fonts.display.fontFamily,
       colors: {
         primary: hex('primary'),
-        secondary: hex('secondary'),
-        tertiary: hex('tertiary'),
         accent: hex('accent'),
-        secondaryAccent: hex('secondaryAccent'),
-        tertiaryAccent: hex('tertiaryAccent'),
-        backgroundPrimary: hex('backgroundPrimary'),
-        backgroundSecondary: hex('backgroundSecondary'),
-        backgroundTertiary: hex('backgroundTertiary'),
+        warn: hex('warn'),
+        success: hex('success'),
+        alert: hex('alert'),
+        attention: hex('attention'),
+        neutral: hex('neutral'),
+        color1: hex('color1'),
+        color2: hex('color2'),
+        color3: hex('color3'),
+        color4: hex('color4'),
       },
     });
   }
@@ -146,14 +154,16 @@ export class BrandEditor {
       colors: {
         ...original.colors,
         primary: { hex: value.colors.primary },
-        secondary: { hex: value.colors.secondary },
-        tertiary: { hex: value.colors.tertiary },
         accent: { hex: value.colors.accent },
-        secondaryAccent: { hex: value.colors.secondaryAccent },
-        tertiaryAccent: { hex: value.colors.tertiaryAccent },
-        backgroundPrimary: { hex: value.colors.backgroundPrimary },
-        backgroundSecondary: { hex: value.colors.backgroundSecondary },
-        backgroundTertiary: { hex: value.colors.backgroundTertiary },
+        warn: { hex: value.colors.warn },
+        success: { hex: value.colors.success },
+        alert: { hex: value.colors.alert },
+        attention: { hex: value.colors.attention },
+        neutral: { hex: value.colors.neutral },
+        color1: { hex: value.colors.color1 },
+        color2: { hex: value.colors.color2 },
+        color3: { hex: value.colors.color3 },
+        color4: { hex: value.colors.color4 },
       },
       dateModified: new Date().toISOString(),
     };

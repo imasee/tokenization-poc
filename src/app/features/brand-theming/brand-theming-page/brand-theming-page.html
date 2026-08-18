@@ -1,10 +1,20 @@
 <main class="brand-theming-page">
   <header class="brand-theming-page__header">
-    <h1>Dynamic Brand Theming</h1>
-    <p>
-      Edit brand details on the left. A mock API simulates the real branding endpoint
-      (with network delay) while the right panel previews changes live.
-    </p>
+    <div class="brand-theming-page__heading-row">
+      <div>
+        <h1>Dynamic Brand Theming</h1>
+
+      </div>
+      <button
+        type="button"
+        class="brand-theming-page__mock-toggle"
+        [attr.aria-pressed]="themeApplied()"
+        title="Loads the colors currently in the editor into the live theme."
+        (click)="onToggleTheme()"
+      >
+        {{ themeApplied() ? 'Reset to default colors' : 'Apply brand colors' }}
+      </button>
+    </div>
   </header>
 
   @if (statusMessage()) {
